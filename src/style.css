@@ -12,12 +12,12 @@
   --border: #F2C8DD;
   --success: #4A7B5A;
   --danger: #9B3A3A;
-  --admin-bg: #1A1410;
-  --admin-surface: #2A2218;
-  --admin-border: #3D3025;
-  --admin-accent: #C17B4A;
-  --admin-text: #F0EAE0;
-  --admin-muted: #8A7B6E;
+  --admin-bg: #ffffff;
+  --admin-surface: #fff5f9;
+  --admin-border: #f3c6d8;
+  --admin-accent: #ff4fa3;
+  --admin-text: #2a1b22;
+  --admin-muted: #8a6b78;
 }
 
 body {

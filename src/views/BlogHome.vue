@@ -41,8 +41,8 @@
       <img v-if="settings.authorImage" :src="settings.authorImage" alt="author" class="author-img" />
       <div>
         <h3>За автора</h3>
-        <img src="/iri.jpeg" style="width: 100px;border-radius: 19px;">
-        <p><strong>{{ settings.author }}</strong> споделя лични истории, красиви моменти и вдъхновения от ежедневието.</p>
+        <img src="/iri.jpeg" style="width: 100px;border-radius: 19px;height: auto;">
+        <p><strong style="color:hotpink;">{{ settings.author }}</strong> споделя лични истории, красиви моменти и вдъхновения от ежедневието.</p>
       </div>
     </div>
   </section>
