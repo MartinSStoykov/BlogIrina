@@ -41,7 +41,7 @@
       <img v-if="settings.authorImage" :src="settings.authorImage" alt="author" class="author-img" />
       <div>
         <h3>За автора</h3>
-        <img src="/iri.jpeg" style="width: 100px;border-radius: 9px;">
+        <img src="/iri.jpeg" style="width: 100px;border-radius: 19px;">
         <p><strong>{{ settings.author }}</strong> споделя лични истории, красиви моменти и вдъхновения от ежедневието.</p>
       </div>
     </div>
@@ -99,7 +99,8 @@ onMounted(load)
   text-align: center;
 }
 .hero-eyebrow {
-  font-size: 0.75rem;
+   font-family: 'Playfair Display', serif;
+  font-size: 0.90rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--accent);
@@ -114,8 +115,12 @@ onMounted(load)
   letter-spacing: -0.03em;
 }
 .hero h1 em { font-style: italic; color: var(--accent); }
-.hero-desc { max-width: 480px; margin: 0 auto; color: var(--text-muted); font-size: 1.05rem; font-weight: 300; }
-
+.hero-desc {
+  margin: 0 auto;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  font-weight: 300;
+}
 .category-bar {
   background: var(--warm-white);
   border-bottom: 1px solid var(--border);
