@@ -3,8 +3,8 @@
 
   <!-- Hero -->
   <div v-if="!activeCategory" class="hero">
-    <div class="hero-eyebrow">Добре дошли</div>
-    <h1>{{ settings.blogName || 'Моят блог' }}<br><em>{{ settings.tagline || 'Истории от живота' }}</em></h1>
+    <div class="hero-eyebrow">Добре дошли в</div>
+    <h1>{{ settings.blogName || 'Моят блог' }}<br><em>{{ settings.tagline || 'Истории от живота ми' }}</em></h1>
     <p class="hero-desc">{{ settings.description || 'Лични истории, рецепти, пътувания и всичко, което ни прави по-живи.' }}</p>
   </div>
 
@@ -24,11 +24,11 @@
   <!-- Grid -->
   <div class="blog-grid">
     <div v-if="loading" class="empty-state">
-      <div class="empty-state-icon">✦</div>
+      <div class="empty-state-icon">★</div>
       <p>Зарежда...</p>
     </div>
     <div v-else-if="!posts.length" class="empty-state">
-      <div class="empty-state-icon">✦</div>
+      <div class="empty-state-icon">★</div>
       <h3>Все още няма статии</h3>
       <p>Влез в администрацията и добави първата си статия.</p>
     </div>
@@ -41,6 +41,7 @@
       <img v-if="settings.authorImage" :src="settings.authorImage" alt="author" class="author-img" />
       <div>
         <h3>За автора</h3>
+        <img src="/flower.avif" style="width: 100px;border-radius: 9px;">
         <p><strong>{{ settings.author }}</strong> споделя лични истории, красиви моменти и вдъхновения от ежедневието.</p>
       </div>
     </div>

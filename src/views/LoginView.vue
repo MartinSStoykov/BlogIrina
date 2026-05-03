@@ -1,7 +1,7 @@
 <template>
   <div class="login-wrap">
     <div class="login-box">
-      <p style="font-size:2rem;margin-bottom:0.5rem">✦</p>
+    <p style="font-size:2rem; margin-bottom:0.5rem; color:#ff69b4;">★</p>
       <h1 class="login-title">Администрация</h1>
       <p class="login-sub">Влез, за да управляваш блога си</p>
       <p v-if="error" class="login-error">{{ error }}</p>
@@ -10,7 +10,6 @@
       <button class="btn-primary" :disabled="loading" @click="doLogin">
         {{ loading ? 'Влизане...' : 'Вход' }}
       </button>
-      <p class="login-hint">По подразбиране: admin / admin123</p>
       <p class="login-hint" style="margin-top:0.5rem">
         <RouterLink to="/" style="color:var(--admin-accent)">← Обратно към блога</RouterLink>
       </p>
@@ -44,6 +43,10 @@ async function doLogin() {
 </script>
 
 <style scoped>
+:root, .login-wrap {
+  --admin-accent: #ff69b4; /* лилав */
+}
+
 .login-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--admin-bg); }
 .login-box { width: 380px; background: var(--admin-surface); border: 1px solid var(--admin-border); border-radius: 12px; padding: 2.5rem 2rem; text-align: center; }
 .login-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--admin-text); margin-bottom: 0.3rem; }

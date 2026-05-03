@@ -1,7 +1,7 @@
 <template>
   <article class="post-card" @click="$router.push(`/post/${post.id}`)">
     <img v-if="post.image" :src="imageUrl(post.image)" class="post-card-img" :alt="post.title" />
-    <div v-else class="post-card-img-placeholder">✦</div>
+    <div v-else class="post-card-img-placeholder">★</div>
     <div class="post-card-body">
       <div class="post-card-category">{{ post.category }}</div>
       <h2 class="post-card-title">{{ post.title }}</h2>

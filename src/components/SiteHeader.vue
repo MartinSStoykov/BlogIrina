@@ -2,7 +2,7 @@
   <header class="site-header">
     <div class="header-inner">
       <RouterLink to="/" class="logo">
-        {{ settings.blogName || 'Моят блог' }} <span>✦</span>
+        {{ settings.blogName || 'Блогът на Ирина Андре' }} <span>★</span>
       </RouterLink>
       <nav>
         <ul class="nav-links">

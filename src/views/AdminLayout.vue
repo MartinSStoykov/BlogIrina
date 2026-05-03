@@ -2,7 +2,7 @@
   <div class="admin-layout">
     <aside class="admin-sidebar">
       <div class="admin-logo">
-        <span>✦ Блог Панел</span>
+        <span>★ Блог Панел</span>
         <small>Администрация</small>
       </div>
       <ul class="sidebar-nav">
