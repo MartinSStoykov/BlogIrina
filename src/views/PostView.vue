@@ -64,5 +64,5 @@ onMounted(async () => {
 }
 .post-meta { display: flex; gap: 1.5rem; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 2rem; }
 .post-hero-img { width: 100%; border-radius: 2px; margin-bottom: 2.5rem; max-height: 480px; object-fit: cover; }
-.post-content { font-size: 1.05rem; line-height: 1.85; color: var(--text-mid); font-weight: 300; white-space: pre-wrap;max-width: 600px;}
+.post-content { font-size: 1.05rem; line-height: 1.85; color: var(--text-mid); font-weight: 300; white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; }
 </style>
