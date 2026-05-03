@@ -40,13 +40,13 @@
     <div class="author-box">
       <img v-if="settings.authorImage" :src="settings.authorImage" alt="author" class="author-img" />
       <div>
-        <h3>За автора</h3>
-       <img 
-  src="/iri.jpeg" 
-  style="width: 170px; height: 260px; border-radius: 12px; object-fit: cover; object-position: center top;">
-        <p><strong style="color:hotpink;">{{ settings.author }}</strong> споделя лични истории, красиви моменти и вдъхновения от ежедневието.</p>
-      </div>
-    </div>
+       <h3>За автора</h3>
+<div style="display: flex; align-items: center; gap: 16px;">
+  <img 
+    src="/iri.jpeg" 
+    style="width: 170px; height: 260px; border-radius: 12px; object-fit: cover; object-position: center top; flex-shrink: 0;">
+  <p><strong style="color:hotpink;">{{ settings.author }}</strong> споделя лични истории, красиви моменти и вдъхновения от ежедневието.</p>
+</div>
   </section>
 
   <footer class="site-footer">
