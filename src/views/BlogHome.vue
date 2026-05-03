@@ -36,18 +36,17 @@
   </div>
 
   <!-- Author block -->
-  <section v-if="settings.author" style="max-width:1100px;margin:1rem auto 0;padding:0 2rem;">
-    <div class="author-box">
-      <img v-if="settings.authorImage" :src="settings.authorImage" alt="author" class="author-img" />
-      <div>
-       <h3>За автора</h3>
-<div style="display: flex; align-items: center; gap: 16px;">
-  <img 
-    src="/iri.jpeg" 
-    style="width: 170px; height: 260px; border-radius: 12px; object-fit: cover; object-position: center top; flex-shrink: 0;">
-  <p><strong style="color:hotpink;">{{ settings.author }}</strong> споделя лични истории, красиви моменти и вдъхновения от ежедневието.</p>
-</div>
-  </section>
+<section v-if="settings.author" style="max-width:1100px;margin:1rem auto 0;padding:0 2rem;">
+  <div class="author-box">
+    <img 
+      src="/iri.jpeg" 
+      style="width: 170px; height: 260px; border-radius: 12px; object-fit: cover; object-position: center top; flex-shrink: 0;">
+    <div>
+      <h3>За автора</h3>
+      <p><strong style="color:hotpink;">{{ settings.author }}</strong> споделя лични истории, красиви моменти и вдъхновения от ежедневието.</p>
+    </div>
+  </div>
+</section>
 
   <footer class="site-footer">
     <p>© {{ new Date().getFullYear() }} {{ settings.blogName || 'Моят блог' }} · Всички права запазени</p>
