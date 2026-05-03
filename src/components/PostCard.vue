@@ -1,6 +1,6 @@
 <template>
   <article class="post-card" @click="$router.push(`/post/${post.id}`)">
-    <img v-if="post.image" :src="post.image" class="post-card-img" :alt="post.title" />
+    <img v-if="post.image" :src="imageUrl(post.image)" class="post-card-img" :alt="post.title" />
     <div v-else class="post-card-img-placeholder">✦</div>
     <div class="post-card-body">
       <div class="post-card-category">{{ post.category }}</div>
@@ -15,6 +15,7 @@
 </template>
 
 <script setup>
+import { imageUrl } from '../composables/useApi'
 defineProps({ post: Object })
 </script>
 

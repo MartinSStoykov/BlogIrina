@@ -10,7 +10,7 @@
         <span>{{ post.date }}</span>
       </div>
     </div>
-    <img v-if="post.image" :src="post.image" class="post-hero-img" :alt="post.title" />
+    <img v-if="post.image" :src="imageUrl(post.image)" class="post-hero-img" :alt="post.title" />
     <div class="post-content">{{ post.content }}</div>
   </div>
   <div v-else-if="loading" class="single-post" style="text-align:center;padding-top:5rem;color:var(--text-muted);">Зарежда...</div>
@@ -20,7 +20,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import SiteHeader from '../components/SiteHeader.vue'
-import { api } from '../composables/useApi.js'
+import { api, imageUrl } from '../composables/useApi.js'
 
 const route = useRoute()
 const post = ref(null)

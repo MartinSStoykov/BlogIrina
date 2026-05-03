@@ -29,7 +29,7 @@
       <label>Главна снимка</label>
       <input type="file" accept="image/*" @change="handleImage" />
       <div v-if="form.image" class="img-preview-wrap">
-        <img :src="form.image" class="img-preview" alt="preview" />
+        <img :src="imageUrl(form.image)" class="img-preview" alt="preview" />
         <div style="margin-top:0.4rem">
           <button class="tbl-btn danger" style="font-size:0.72rem" @click="form.image=''">Премахни снимката</button>
         </div>
@@ -51,7 +51,7 @@
 <script setup>
 import { ref, reactive, onMounted, computed, inject } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { api } from '../composables/useApi.js'
+import { api, imageUrl } from '../composables/useApi.js'
 
 const route = useRoute()
 const router = useRouter()

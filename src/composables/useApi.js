@@ -1,6 +1,21 @@
+// Базов адрес на бекенда. В development е празен (Vite proxy се грижи за /api).
+// В production се задава чрез .env файл: VITE_API_URL=https://your-api.onrender.com
+const API_BASE = import.meta.env.VITE_API_URL || ''
+
+export const apiBase = API_BASE
+
+// За картинки - ако пътят е относителен (/uploads/xxx), допълни го с API_BASE
+export function imageUrl(src) {
+  if (!src) return ''
+  if (/^https?:\/\//i.test(src)) return src
+  if (src.startsWith('/uploads/')) return API_BASE + src
+  return src
+}
+
 export async function apiFetch(path, options = {}) {
-  const res = await fetch('/api' + path, {
+  const res = await fetch(API_BASE + '/api' + path, {
     headers: { 'Content-Type': 'application/json', ...options.headers },
+    credentials: 'include',
     ...options,
     body: options.body ? JSON.stringify(options.body) : undefined
   })
@@ -38,7 +53,11 @@ export const api = {
   uploadImage: async (file) => {
     const fd = new FormData()
     fd.append('image', file)
-    const res = await fetch('/api/upload', { method: 'POST', body: fd })
+    const res = await fetch(API_BASE + '/api/upload', {
+      method: 'POST',
+      credentials: 'include',
+      body: fd
+    })
     if (!res.ok) throw new Error('Грешка при качване')
     return res.json()
   }

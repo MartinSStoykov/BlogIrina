@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import App from './App.vue'
 import './style.css'
+import { api } from './composables/useApi'
 
 import BlogHome from './views/BlogHome.vue'
 import PostView from './views/PostView.vue'
@@ -37,9 +38,12 @@ const router = createRouter({
 
 router.beforeEach(async (to) => {
   if (to.path.startsWith('/admin')) {
-    const res = await fetch('/api/me')
-    const data = await res.json()
-    if (!data.loggedIn) return '/login'
+    try {
+      const data = await api.me()
+      if (!data.loggedIn) return '/login'
+    } catch {
+      return '/login'
+    }
   }
 })
 
