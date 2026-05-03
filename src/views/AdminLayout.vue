@@ -3,7 +3,7 @@
     <aside class="admin-sidebar">
       <div class="admin-logo">
         <span>✦ Блог Панел</span>
-        <small>Администрацияciciciic</small>
+        <small>Администрация</small>
       </div>
       <ul class="sidebar-nav">
         <li>
