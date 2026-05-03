@@ -116,6 +116,7 @@ onMounted(load)
 }
 .hero h1 em { font-style: italic; color: var(--accent); }
 .hero-desc {
+  max-width: 600px;
   margin: 0 auto;
   color: var(--text-muted);
   font-size: 1.05rem;
