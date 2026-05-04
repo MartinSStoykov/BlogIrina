@@ -10,7 +10,10 @@
         <span>{{ post.date }}</span>
       </div>
     </div>
-    <img v-if="post.image" :src="imageUrl(post.image)" class="post-hero-img" :alt="post.title" />
+
+    <!-- Слайдер (поддържа и стари статии с 1 снимка) -->
+    <ImageSlider :images="post.images?.length ? post.images : (post.image ? [post.image] : [])" />
+
     <div class="post-content">{{ post.content }}</div>
   </div>
   <div v-else-if="loading" class="single-post" style="text-align:center;padding-top:5rem;color:var(--text-muted);">Зарежда...</div>
@@ -20,6 +23,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import SiteHeader from '../components/SiteHeader.vue'
+import ImageSlider from '../components/ImageSlider.vue'
 import { api, imageUrl } from '../composables/useApi.js'
 
 const route = useRoute()
@@ -63,6 +67,5 @@ onMounted(async () => {
   letter-spacing: -0.02em;
 }
 .post-meta { display: flex; gap: 1.5rem; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 2rem; }
-.post-hero-img { width: 100%; border-radius: 2px; margin-bottom: 2.5rem; max-height: 480px; object-fit: cover; }
 .post-content { font-size: 1.05rem; line-height: 1.85; color: var(--text-mid); font-weight: 300; white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; }
 </style>
