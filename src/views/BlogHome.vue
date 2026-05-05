@@ -36,17 +36,18 @@
   </div>
 
   <!-- Author block -->
-<section v-if="settings.author" style="max-width:1100px;margin:1rem auto 0;padding:0 2rem;">
-  <div class="author-box">
-    <img 
-      src="/iri.jpeg" 
-      style="width: 170px; height: 260px; border-radius: 12px; object-fit: cover; object-position: center top; flex-shrink: 0;">
-    <div>
-      <h3>За автора</h3>
-      <p><strong style="color:hotpink;">{{ settings.author }}</strong> споделя лични истории, красиви моменти и вдъхновения от ежедневието.</p>
+  <section v-if="settings.author" class="author-section">
+    <div class="author-box">
+      <img
+        src="/iri.jpeg"
+        class="author-img"
+        alt="Автор">
+      <div>
+        <h3>За автора</h3>
+        <p><strong style="color:hotpink;">{{ settings.author }}</strong> споделя лични истории, красиви моменти и вдъхновения от ежедневието.</p>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <footer class="site-footer">
     <p>© {{ new Date().getFullYear() }} {{ settings.blogName || 'Моят блог' }} · Всички права запазени</p>
@@ -96,12 +97,12 @@ onMounted(load)
 .hero {
   background: var(--warm-white);
   border-bottom: 1px solid var(--border);
-  padding: 5rem 2rem 4rem;
+  padding: 4rem 1.5rem 3rem;
   text-align: center;
 }
 .hero-eyebrow {
-   font-family: 'Playfair Display', serif;
-  font-size: 0.90rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 0.85rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--accent);
@@ -109,7 +110,7 @@ onMounted(load)
 }
 .hero h1 {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: clamp(2rem, 8vw, 4.5rem);
   line-height: 1.1;
   color: var(--text-dark);
   margin-bottom: 1.2rem;
@@ -120,13 +121,14 @@ onMounted(load)
   max-width: 600px;
   margin: 0 auto;
   color: var(--text-muted);
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 300;
 }
+
 .category-bar {
   background: var(--warm-white);
   border-bottom: 1px solid var(--border);
-  padding: 0 2rem;
+  padding: 0 1.5rem;
   position: sticky;
   top: 64px;
   z-index: 90;
@@ -137,11 +139,12 @@ onMounted(load)
   display: flex;
   overflow-x: auto;
   scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
 }
 .category-bar-inner::-webkit-scrollbar { display: none; }
 .cat-tab {
-  padding: 1rem 1.2rem;
-  font-size: 0.8rem;
+  padding: 1rem 1rem;
+  font-size: 0.78rem;
   letter-spacing: 0.07em;
   text-transform: uppercase;
   color: var(--text-muted);
@@ -152,18 +155,20 @@ onMounted(load)
   background: none;
   font-family: 'Lato', sans-serif;
   transition: all 0.2s;
+  touch-action: manipulation;
 }
 .cat-tab:hover { color: var(--text-dark); }
 .cat-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
 
 .blog-grid {
   max-width: 1100px;
-  margin: 3rem auto;
-  padding: 0 2rem;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
 }
+
 .empty-state {
   grid-column: 1 / -1;
   text-align: center;
@@ -173,25 +178,54 @@ onMounted(load)
 .empty-state-icon { font-size: 3rem; margin-bottom: 1rem; }
 .empty-state h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 0.5rem; color: var(--text-mid); }
 
+.author-section {
+  max-width: 1100px;
+  margin: 1rem auto 0;
+  padding: 0 1.5rem;
+}
 .author-box {
   background: var(--warm-white);
   border: 1px solid var(--border);
   border-radius: 18px;
-  padding: 2rem;
+  padding: 1.5rem;
   display: flex;
   gap: 1.5rem;
   align-items: center;
   flex-wrap: wrap;
 }
-.author-img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 4px solid var(--accent-light); }
-.author-box h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 0.5rem; }
+.author-img {
+  width: 120px;
+  height: 180px;
+  border-radius: 12px;
+  object-fit: cover;
+  object-position: center top;
+  flex-shrink: 0;
+}
+.author-box h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 0.5rem; }
 
 .site-footer {
   border-top: 1px solid var(--border);
-  padding: 2.5rem 2rem;
+  padding: 2.5rem 1.5rem;
   text-align: center;
   color: var(--text-muted);
   font-size: 0.82rem;
-  margin-top: 5rem;
+  margin-top: 3rem;
+}
+
+@media (max-width: 600px) {
+  .blog-grid {
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
+    gap: 1.2rem;
+  }
+  .author-box {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .author-img {
+    width: 100px;
+    height: 150px;
+  }
 }
 </style>
