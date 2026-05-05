@@ -1,10 +1,7 @@
-// Базов адрес на бекенда. В development е празен (Vite proxy се грижи за /api).
-// В production се задава чрез .env файл: VITE_API_URL=https://your-api.onrender.com
 const API_BASE = import.meta.env.VITE_API_URL || ''
 
 export const apiBase = API_BASE
 
-// За картинки - ако пътят е относителен (/uploads/xxx), допълни го с API_BASE
 export function imageUrl(src) {
   if (!src) return ''
   if (/^https?:\/\//i.test(src)) return src
@@ -12,13 +9,31 @@ export function imageUrl(src) {
   return src
 }
 
+// ── JWT Token helpers ──
+function getToken() {
+  return localStorage.getItem('auth_token')
+}
+function setToken(token) {
+  localStorage.setItem('auth_token', token)
+}
+function removeToken() {
+  localStorage.removeItem('auth_token')
+}
+
 export async function apiFetch(path, options = {}) {
+  const token = getToken()
+  const headers = {
+    'Content-Type': 'application/json',
+    ...options.headers,
+  }
+  if (token) headers['Authorization'] = `Bearer ${token}`
+
   const res = await fetch(API_BASE + '/api' + path, {
-    headers: { 'Content-Type': 'application/json', ...options.headers },
-    credentials: 'include',
     ...options,
+    headers,
     body: options.body ? JSON.stringify(options.body) : undefined
   })
+
   if (!res.ok) {
     const err = await res.json().catch(() => ({ error: 'Грешка' }))
     throw new Error(err.error || 'Грешка')
@@ -44,18 +59,36 @@ export const api = {
   updateSettings: (data) => apiFetch('/settings', { method: 'PUT', body: data }),
 
   // Auth
-  me: () => apiFetch('/me'),
-  login: (username, password) => apiFetch('/login', { method: 'POST', body: { username, password } }),
-  logout: () => apiFetch('/logout', { method: 'POST' }),
+  me: async () => {
+    const token = getToken()
+    if (!token) return { loggedIn: false }
+    try {
+      const data = await apiFetch('/me')
+      return data
+    } catch {
+      removeToken()
+      return { loggedIn: false }
+    }
+  },
+  login: async (username, password) => {
+    const data = await apiFetch('/login', { method: 'POST', body: { username, password } })
+    if (data.token) setToken(data.token)
+    return data
+  },
+  logout: () => {
+    removeToken()
+    return Promise.resolve({ ok: true })
+  },
   changeCredentials: (data) => apiFetch('/change-credentials', { method: 'POST', body: data }),
 
   // Upload
   uploadImage: async (file) => {
+    const token = getToken()
     const fd = new FormData()
     fd.append('image', file)
     const res = await fetch(API_BASE + '/api/upload', {
       method: 'POST',
-      credentials: 'include',
+      headers: token ? { 'Authorization': `Bearer ${token}` } : {},
       body: fd
     })
     if (!res.ok) throw new Error('Грешка при качване')
