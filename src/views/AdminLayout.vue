@@ -1,5 +1,6 @@
 <template>
   <div class="admin-layout">
+    <!-- Страничен панел (десктоп) -->
     <aside class="admin-sidebar">
       <div class="admin-logo">
         <span>★ Блог Панел</span>
@@ -44,9 +45,35 @@
       </div>
     </aside>
 
+    <!-- Главно съдържание -->
     <main class="admin-main">
       <RouterView />
     </main>
+
+    <!-- Мобилна лента отдолу -->
+    <nav class="mobile-bottom-nav">
+      <RouterLink to="/admin" end class="mob-item">
+        <span class="mob-icon">⊞</span>
+        <span>Табло</span>
+      </RouterLink>
+      <RouterLink to="/admin/posts" class="mob-item">
+        <span class="mob-icon">▤</span>
+        <span>Статии</span>
+      </RouterLink>
+      <RouterLink to="/admin/posts/new" class="mob-item mob-new">
+        <span class="mob-icon">✚</span>
+        <span>Нова</span>
+      </RouterLink>
+      <RouterLink to="/admin/comments" class="mob-item">
+        <span class="mob-icon">💬</span>
+        <span>Коментари</span>
+        <span v-if="pendingCount > 0" class="mob-badge">{{ pendingCount }}</span>
+      </RouterLink>
+      <button class="mob-item mob-logout" @click="doLogout">
+        <span class="mob-icon">←</span>
+        <span>Изход</span>
+      </button>
+    </nav>
   </div>
 </template>
 
@@ -72,7 +99,14 @@ async function doLogout() {
 </script>
 
 <style scoped>
-.admin-layout { display: flex; min-height: 100vh; background: var(--admin-bg); font-family: 'Lato', sans-serif; }
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: var(--admin-bg);
+  font-family: 'Lato', sans-serif;
+}
+
+/* ── Десктоп sidebar ── */
 .admin-sidebar {
   width: 240px;
   background: var(--admin-surface);
@@ -129,9 +163,71 @@ async function doLogout() {
   transition: all 0.2s;
   font-family: 'Lato', sans-serif;
   letter-spacing: 0.05em;
+  box-sizing: border-box;
 }
 .exit-btn:hover { border-color: var(--admin-accent); color: var(--admin-accent); }
-.admin-main { flex: 1; padding: 2rem; overflow-y: auto; color: var(--admin-text); }
 
-@media (max-width: 700px) { .admin-sidebar { display: none; } }
+.admin-main {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  color: var(--admin-text);
+}
+
+/* ── Мобилна лента отдолу ── */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: var(--admin-surface, #fff);
+  border-top: 1px solid var(--admin-border, #eee);
+  z-index: 200;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.mob-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 0.6rem 0.25rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--admin-muted, #aaa);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Lato', sans-serif;
+  position: relative;
+  touch-action: manipulation;
+  transition: color 0.15s;
+}
+.mob-item.router-link-active { color: var(--admin-accent, #e0559a); }
+.mob-item:hover { color: var(--admin-text, #333); }
+.mob-icon { font-size: 1.2rem; line-height: 1; }
+.mob-new { color: #e0559a; font-weight: 700; }
+.mob-badge {
+  position: absolute;
+  top: 4px; right: calc(50% - 18px);
+  background: #e0559a;
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 700;
+  border-radius: 20px;
+  padding: 1px 5px;
+  line-height: 1.4;
+}
+.mob-logout { color: var(--admin-muted, #aaa); }
+
+@media (max-width: 700px) {
+  .admin-sidebar { display: none; }
+  .mobile-bottom-nav { display: flex; }
+  .admin-main {
+    padding: 1.25rem 1rem;
+    padding-bottom: 80px;
+  }
+}
 </style>
