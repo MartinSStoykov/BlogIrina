@@ -13,6 +13,7 @@ import AdminPosts from './views/AdminPosts.vue'
 import AdminPostForm from './views/AdminPostForm.vue'
 import AdminCategories from './views/AdminCategories.vue'
 import AdminSettings from './views/AdminSettings.vue'
+import AdminComments from './views/AdminComments.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -29,6 +30,7 @@ const router = createRouter({
         { path: 'posts/new', component: AdminPostForm },
         { path: 'posts/:id/edit', component: AdminPostForm },
         { path: 'categories', component: AdminCategories },
+        { path: 'comments', component: AdminComments },
         { path: 'settings', component: AdminSettings },
       ]
     }

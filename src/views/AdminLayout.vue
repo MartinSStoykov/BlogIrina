@@ -27,6 +27,12 @@
           </RouterLink>
         </li>
         <li>
+          <RouterLink to="/admin/comments">
+            <span class="icon">💬</span> Коментари
+            <span v-if="pendingCount > 0" class="pending-badge">{{ pendingCount }}</span>
+          </RouterLink>
+        </li>
+        <li>
           <RouterLink to="/admin/settings">
             <span class="icon">⚙</span> Настройки
           </RouterLink>
@@ -45,10 +51,19 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { api } from '../composables/useApi.js'
+import { api, apiFetch } from '../composables/useApi.js'
 
 const router = useRouter()
+const pendingCount = ref(0)
+
+onMounted(async () => {
+  try {
+    const comments = await apiFetch('/admin/comments')
+    pendingCount.value = comments.filter(c => !c.approved).length
+  } catch (_) {}
+})
 
 async function doLogout() {
   await api.logout()
@@ -90,6 +105,16 @@ async function doLogout() {
 .sidebar-nav a:hover { background: rgba(193,123,74,0.1); color: var(--admin-text); }
 .sidebar-nav a.router-link-active { background: rgba(193,123,74,0.2); color: var(--admin-accent); }
 .icon { font-size: 1rem; width: 20px; text-align: center; }
+.pending-badge {
+  margin-left: auto;
+  background: #e0559a;
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  border-radius: 20px;
+  padding: 1px 7px;
+  line-height: 1.6;
+}
 .sidebar-exit { padding: 1.5rem 1.25rem 0; border-top: 1px solid var(--admin-border); margin-top: 1rem; }
 .exit-btn {
   width: 100%;
